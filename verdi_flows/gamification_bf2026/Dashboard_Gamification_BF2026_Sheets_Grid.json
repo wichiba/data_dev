@@ -1,0 +1,309 @@
+{
+  "name": "Dashboard Gamification BF 2026 (Sheets → Grid)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "id": "321c5063-dcfc-4f04-82cb-92a3fae84754",
+      "name": "Every Day 11AM São Paulo",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1776,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "today",
+              "value": "={{ $now.setZone('America/Sao_Paulo').toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "a2",
+              "name": "grid_doc_id",
+              "value": "COLE_AQUI_O_ID_DO_DOC_NO_GRID",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "grid_title",
+              "value": "Dashboard Gamification Black Friday 2026",
+              "type": "string"
+            },
+            {
+              "id": "a4",
+              "name": "template",
+              "value": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dashboard Gamification Black Friday 2026 | Sellers MLB</title>\n<style>\n  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');\n  :root{--yellow:#FFE600;--yellow-soft:#FFFBD6;--ink:#111;--ink-soft:#62625f;--paper:#FBFBF9;--panel:#fff;--line:#E9E8E2;--caution:#B34700;--caution-bg:#FFF6EC;--ok:#1a7f37;--ok-bg:#EFF9F1;\n        --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;--heading:'Archivo',sans-serif;--body:'Inter',-apple-system,sans-serif;}\n  *{box-sizing:border-box;}\n  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}\n  button,input,select{font-family:inherit;}\n  button:focus-visible,select:focus-visible,input:focus-visible,th[data-sort]:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;box-shadow:0 0 0 1.5px var(--ink);}\n\n  .topbar{background:var(--ink);color:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}\n  .topbar-left{display:flex;align-items:center;gap:10px;font-family:var(--heading);font-weight:800;font-size:16px;}\n  .logo{height:30px;width:auto;display:block;}\n  .logo-badge{height:30px;min-width:42px;padding:0 8px;border-radius:15px;background:var(--yellow);color:#2D3277;display:inline-flex;align-items:center;justify-content:center;font-family:var(--heading);font-weight:900;font-size:14px;letter-spacing:-.02em;}\n  .topbar-right{font-size:12.5px;color:var(--yellow);font-weight:600;}\n  .wrap{max-width:1380px;margin:0 auto;padding:0 28px 90px;}\n\n  header.hero{padding:38px 0 6px;}\n  .accent-bar{height:6px;width:56px;background:var(--yellow);border-radius:3px;margin-bottom:20px;}\n  h1{font-family:var(--heading);font-weight:900;font-size:clamp(26px,3.4vw,38px);line-height:1.1;margin:0 0 12px;letter-spacing:-.02em;max-width:860px;}\n  .lede{font-size:15.5px;color:var(--ink-soft);max-width:760px;line-height:1.55;margin:0;}\n  .gen-note{font-size:11.5px;color:#a7a59a;margin-top:14px;font-family:var(--mono);}\n\n  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:26px 0 20px;}\n  .tabs{display:inline-flex;flex-wrap:wrap;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px;gap:2px;}\n  .tabs button{font-family:var(--heading);font-weight:700;font-size:13.5px;padding:9px 20px;border:none;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;}\n  .tabs button[aria-selected=\"true\"]{background:var(--ink);color:var(--yellow);}\n  .tabs button[aria-selected=\"false\"]:hover{background:var(--line);}\n  .meta-pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);}\n  .meta-pill strong{font-family:var(--heading);font-weight:900;font-size:15px;color:var(--ink);background:var(--yellow);padding:4px 11px;border-radius:999px;}\n  .tabpanel[hidden]{display:none;}\n\n  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}\n  .card{background:#fff;border:1.5px solid var(--line);border-left-width:5px;border-radius:14px;padding:20px 22px;text-align:left;font:inherit;color:inherit;display:block;width:100%;}\n  button.card{cursor:pointer;transition:transform .15s,border-color .15s;} button.card:hover{transform:translateY(-2px);border-color:var(--ink);}\n  button.card.ok:hover{border-left-color:var(--ok);} button.card.bad:hover{border-left-color:var(--caution);}\n  .card.ok{border-left-color:var(--ok);} .card.bad{border-left-color:var(--caution);}\n  .card.total{background:var(--ink);color:#fff;border-color:var(--ink);border-left-color:var(--yellow);}\n  .card .lab{font-size:13px;color:var(--ink-soft);margin-bottom:8px;font-weight:500;}\n  .card.total .lab{color:#c9c8c0;}\n  .card .num{font-family:var(--heading);font-weight:900;font-size:clamp(36px,4.4vw,52px);line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums;}\n  .card.total .num{color:var(--yellow);} .card.ok .num{color:var(--ok);} .card.bad .num{color:var(--caution);}\n  .card .row{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12.5px;color:var(--ink-soft);}\n  .card.total .row{color:#c9c8c0;}\n  .badge{display:inline-flex;font-family:var(--mono);font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;}\n  .badge.okb{background:var(--ok-bg);color:#14532d;border:1.5px solid var(--ok);padding:3.5px 9px;}\n  .badge.warnb{background:var(--caution-bg);color:#5c2700;border:1.5px solid var(--caution);padding:3.5px 9px;}\n  .badge.y{background:var(--yellow);color:var(--ink);}\n  .badge.sm{font-size:10.5px;padding:2px 8px;}\n\n  .split{margin:16px 0 0;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:16px 20px;}\n  .split-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}\n  .split-top b{font-family:var(--mono);color:var(--ink);}\n  .split-bar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--line);}\n  .split-bar i{display:block;height:100%;transform-origin:left;}\n  .split-bar .s-ok{background:var(--ok);} .split-bar .s-bad{background:var(--caution);}\n  .split-bar i+i{margin-left:2px;}\n\n  .panel{background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:26px;}\n  .panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px;}\n  .panel-head h2{font-family:var(--heading);font-size:18px;font-weight:800;margin:0;letter-spacing:-.01em;}\n  .panel-head p{margin:4px 0 0;font-size:13px;color:var(--ink-soft);}\n  .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}\n  .search{flex:1 1 240px;max-width:340px;position:relative;}\n  .search input{width:100%;padding:10px 12px;font-size:14px;border:1.5px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);}\n  .search input:focus{border-color:var(--ink);}\n  .quick{display:flex;gap:6px;flex-wrap:wrap;}\n  .quick button{font-family:var(--mono);font-size:12px;padding:8px 11px;border-radius:8px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;}\n  .quick button:hover{border-color:var(--ink);color:var(--ink);background:var(--yellow);}\n  .quick button.on{border-color:var(--ink);background:var(--yellow);color:var(--ink);font-weight:600;}\n  .ghost{font-family:var(--mono);font-size:12px;font-weight:600;padding:8px 12px;border-radius:8px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;margin-left:auto;}\n  .ghost:hover{background:var(--yellow);}\n  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin-bottom:12px;align-items:center;}\n  .legend span{display:inline-flex;align-items:center;gap:7px;}\n  .lg{width:26px;height:10px;border:1.5px solid var(--ink);border-radius:5px;display:inline-block;} .lg.y{background:var(--yellow);} .lg.g{background:var(--ok);border-color:var(--ok);}\n  .key-dot{width:12px;height:12px;border-radius:3px;background:var(--yellow);border:1.5px solid var(--ink);display:inline-block;}\n\n  .tw{overflow:auto;height:78vh;min-height:360px;background:#fff;border:1.5px solid var(--line);border-radius:12px;}\n  table.dt{border-collapse:separate;border-spacing:0;width:100%;font-size:12px;}\n  table.dt th{position:sticky;top:0;z-index:2;font-size:11px;color:var(--ink-soft);font-weight:600;text-align:right;padding:8px 10px;line-height:1.25;border-bottom:1.5px solid var(--line);white-space:nowrap;background:var(--paper);user-select:none;}\n  table.dt th.l,table.dt td.l{text-align:left;}\n  table.dt th[data-sort]{cursor:pointer;} table.dt th[data-sort]:hover{background:var(--yellow);color:var(--ink);}\n  table.dt th.key{background:var(--yellow);color:var(--ink);font-weight:700;border-bottom-color:var(--ink);}\n  table.dt th.key:hover{background:#ffd900;}\n  table.dt th .ar{display:inline-block;width:12px;margin-left:4px;font-size:10px;color:var(--ink);}\n  table.dt tbody td{height:40px;padding-top:0;padding-bottom:0;vertical-align:middle;}\n  table.dt tr.sp td{padding:0;border:none;background:none;}\n  table.dt td{padding:4px 10px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--mono);white-space:nowrap;font-variant-numeric:tabular-nums;}\n  table.dt td.l{font-weight:600;}\n  table.dt td.key{background:var(--yellow-soft);}\n  table.dt tbody tr:hover td{background:#F6F5EF;} table.dt tbody tr:hover td.key{background:#FFF6A8;}\n  table.dt tr:last-child td{border-bottom:none;}\n  td.mut{color:#a7a59a;}\n  td.prog{min-width:170px;text-align:left;}\n  .pg-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:3px;font-size:11px;line-height:1.2;}\n  .pg-top strong{font-family:var(--mono);font-weight:600;} .pg-top span{font-size:10.5px;color:var(--ink-soft);}\n  .t-bad{color:var(--caution);} .t-ok{color:var(--ok);}\n  .pg-bar{height:7px;border-radius:99px;background:#fff;border:1.5px solid var(--ink);overflow:hidden;}\n  .pg-bar i{display:block;height:100%;background:var(--yellow);border-radius:99px;transform-origin:left;}\n  .pg-bar.hit{border-color:var(--ok);} .pg-bar.hit i{background:var(--ok);}\n  .pg-bar.none{border-color:var(--line);background:var(--paper);}\n  .intro .pg-bar i{animation:grow .9s cubic-bezier(.2,.7,.2,1) both;}\n  .intro .split-bar i{animation:grow 1s cubic-bezier(.2,.7,.2,1) both;}\n  @keyframes grow{from{transform:scaleX(0);}to{transform:scaleX(1);}}\n\n  .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--ink-soft);}\n  .empty{padding:36px 20px;text-align:center;color:var(--ink-soft);font-size:14px;}\n\n  .goals{margin-top:16px;padding-top:6px;border-top:1px solid var(--line);}\n  .goal{display:grid;grid-template-columns:minmax(230px,auto) 1fr auto;gap:14px;align-items:center;margin-top:10px;font-size:12.5px;}\n  .goal .gl{color:var(--ink);font-weight:500;} .goal .gn{color:var(--ink-soft);white-space:nowrap;} .goal .gn b{font-family:var(--mono);color:var(--ink);}\n  .gbar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;} .gbar i{display:block;height:100%;background:var(--ok);border-radius:99px;transform-origin:left;}\n  .intro .gbar i{animation:grow 1s cubic-bezier(.2,.7,.2,1) both;}\n  @media(max-width:720px){.goal{grid-template-columns:1fr;gap:4px;}}\n  @media(max-width:720px){.wrap{padding:0 16px 70px;}.topbar{padding:12px 16px;}.ghost{margin-left:0;}}\n  @media(prefers-reduced-motion:reduce){.intro .pg-bar i,.intro .split-bar i,.intro .gbar i{animation:none;}button.card{transition:none;}}\n</style>\n</head>\n<body>\n<div class=\"topbar\"><div class=\"topbar-left\"><span class=\"logo-badge\">ML</span>Mercado Livre</div><div class=\"topbar-right\">Dashboard Gamification Black Friday 2026</div></div>\n<div class=\"wrap\">\n  <header class=\"hero\">\n    <div class=\"accent-bar\"></div>\n    <h1>Gamification Black Friday 2026 | <br> Sellers MLB</h1>\n    <p class=\"lede\">Dashboard de acompanhamento do atingimento da meta dos sellers</p>\n    <p class=\"gen-note\" id=\"gen-note\"></p>\n  </header>\n\n  <div class=\"toolbar\">\n    <div class=\"tabs\" role=\"tablist\" aria-label=\"Programas\">\n      <button type=\"button\" role=\"tab\" id=\"tab-cp\" aria-selected=\"true\" aria-controls=\"panel-cp\">Central de Promoções</button>\n      <button type=\"button\" role=\"tab\" id=\"tab-aff\" aria-selected=\"false\" aria-controls=\"panel-aff\">Afiliados</button>\n      <button type=\"button\" role=\"tab\" id=\"tab-mp\" aria-selected=\"false\" aria-controls=\"panel-mp\">Minha Página</button>\n      <button type=\"button\" role=\"tab\" id=\"tab-acc\" aria-selected=\"false\" aria-controls=\"panel-acc\">Acompanhamento Assessores</button>\n    </div>\n    <div class=\"meta-pill\" id=\"meta-pill\"></div>\n  </div>\n\n  <section class=\"tabpanel\" id=\"panel-cp\" role=\"tabpanel\" aria-labelledby=\"tab-cp\"></section>\n  <section class=\"tabpanel\" id=\"panel-aff\" role=\"tabpanel\" aria-labelledby=\"tab-aff\" hidden></section>\n  <section class=\"tabpanel\" id=\"panel-mp\" role=\"tabpanel\" aria-labelledby=\"tab-mp\" hidden></section>\n  <section class=\"tabpanel\" id=\"panel-acc\" role=\"tabpanel\" aria-labelledby=\"tab-acc\" hidden></section>\n</div>\n\n<script>\nconst D = <?!= dadosJson ?>;\n\nconst $ = id => document.getElementById(id);\nconst esc = s => String(s).replace(/[&<>\"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[m]));\nconst nInt = n => n.toLocaleString('pt-BR');\nconst nDec = (n, d=2) => n.toLocaleString('pt-BR', {minimumFractionDigits:d, maximumFractionDigits:d});\nconst nBRL = n => n.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});\nconst nPct = (n, d=1) => nDec(n, d) + '%';\nconst reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;\n\n// ---------------------------------------------------------------- configuração das abas\nconst TABS = {\n  cp: {\n    id:'cp', title:'Central de Promoções', meta:70, rows:D.cp || [],\n    metaText:'Meta: 70% de variação',\n    idx:{flag:5, ating:4},\n    subtitle:'Todos os sellers da Central de Promoções, com o atingimento da meta de 70%.',\n    searchPh:'Buscar por Seller ID, nome ou assessor',\n    searchIdx:[0,8,9,10],\n    cols:[\n      {i:0, label:'Seller ID', orig:'SELLER_ID', type:'id'},\n      {i:8, label:'Nome Seller', orig:'NOME_SELLER', type:'txt'},\n      {i:9, label:'CNPJ', orig:'CNPJ', type:'txt'},\n      {i:10, label:'Assessor', orig:'ASSESSOR', type:'txt'},\n      {i:4, label:'Atingimento da meta (%)', orig:'ATINGIMENTO_VS_META', type:'prog', key:true},\n      {i:5, label:'Meta batida?', orig:'FLAG_META_BATIDA', type:'flag', key:true, yes:'Meta batida', no:'Não batida'},\n      {i:1, label:'Investimento médio (jan–set/26)', orig:'MEDIA_INVESTIMENTO_JAN_SET_2026', type:'brl'},\n      {i:7, label:'Meta de investimento (R$)', orig:'META_INVESTIMENTO_2026', type:'brl'},\n      {i:2, label:'Investimento (out–nov/26)', orig:'INVESTIMENTO_OUT_NOV_2026', type:'brl'},\n      {i:3, label:'Variação out–nov/26 vs. média jan–set/26', orig:'VARIACAO_OUT_NOV_2026_VS_MEDIA_JAN_SET_2026', type:'pct'},\n      {i:6, label:'Crescimento out–nov/25 vs. média jan–set/25', orig:'CRESCIMENTO_OUT_NOV_2025_VS_MEDIA_JAN_SET_2025', type:'pct'}\n    ]\n  },\n  aff: {\n    id:'aff', title:'Afiliados', meta:80, rows:D.aff || [],\n    metaText:'Meta: 80% dos itens com 5% de comissão',\n    idx:{flag:5, ating:4},\n    subtitle:'Todos os sellers de Afiliados, com o atingimento da meta de 80%.',\n    searchPh:'Buscar por Seller ID, nome ou assessor',\n    searchIdx:[0,6,7,8],\n    cols:[\n      {i:0, label:'Seller ID', orig:'SELLER_ID', type:'id'},\n      {i:6, label:'Nome Seller', orig:'NOME_SELLER', type:'txt'},\n      {i:7, label:'CNPJ', orig:'CNPJ', type:'txt'},\n      {i:8, label:'Assessor', orig:'ASSESSOR', type:'txt'},\n      {i:9, label:'Total de itens KMIs', orig:'TOTAL_ITENS_KMIS', type:'int'},\n      {i:4, label:'Atingimento da meta (%)', orig:'ATINGIMENTO_VS_META', type:'prog', key:true},\n      {i:5, label:'Meta atingida?', orig:'FLAG_META_BATIDA', type:'flag', key:true, yes:'Meta atingida', no:'Não atingida'},\n      {i:1, label:'Total de itens', orig:'TOTAL_ITENS', type:'int'},\n      {i:2, label:'Itens com 5% de comissão', orig:'ITENS_COM_5_COMISSAO', type:'int'},\n      {i:3, label:'% de itens com 5% de comissão', orig:'ITENS_COM_5_DE_COMISSAO_PCT', type:'pct2'}\n    ]\n  },\n  mp: {\n    id:'mp', title:'Minha Página', meta:100, rows:D.mp || [],\n    metaText:'Metas: cupons válidos e produtos em oferta relâmpago', metaBadge:'2 cupons · 6 produtos',\n    idx:{flag:5, ating:3},\n    subtitle:'Todos os sellers de Minha Página, com o atingimento da meta de cupons válidos e da meta de produtos em oferta relâmpago.',\n    searchPh:'Buscar por Seller ID, nome ou assessor',\n    searchIdx:[0,6,7,8],\n    hitLabel:'Bateram as duas metas', missLabel:'Não bateram as duas metas', noMiss:true,\n    goals:[\n      {label:'Meta de cupons válidos', i:3},\n      {label:'Meta de produtos oferta relâmpago', i:4}\n    ],\n    cols:[\n      {i:0, label:'Seller ID', orig:'SELLER_ID', type:'id'},\n      {i:6, label:'Nome Seller', orig:'NOME_SELLER', type:'txt'},\n      {i:7, label:'CNPJ', orig:'CNPJ', type:'txt'},\n      {i:8, label:'Assessor', orig:'ASSESSOR', type:'txt'},\n      {i:3, label:'Atingimento da meta de cupons válidos (%)', orig:'ATINGIMENTO_VS_META_CUPONS', type:'prog', key:true},\n      {i:4, label:'Atingimento da meta de produtos oferta relâmpago (%)', orig:'ATINGIMENTO_VS_META_RELAMPAGO', type:'prog', key:true},\n      {i:1, label:'Cupons válidos', orig:'cupons_validos', type:'int'},\n      {i:2, label:'Produtos oferta relâmpago', orig:'produtos_relampago', type:'int'}\n    ]\n  },\n  acc: {\n  id: 'acc',\n  title: 'Acompanhamento Assessores',\n  meta: 100,\n  rows: D.acomp || [],\n  metaText: '',\n  metaBadge: '',\n  idx: { flag: 5, ating: 5 },\n  subtitle: 'Acompanhamento do desempenho por assessor.',\n  totalLabel: 'Total de assessores',\n  unit: 'assessores',\n  unitOne: 'assessor',\n  searchPh: 'Buscar por nome do assessor',\n  hitLabel: '',\n  missLabel: '',\n  noMiss: true,\n  hideGoalSummary: true,\n  goals: [],\n  cols: [\n    { i: 0, label: 'Assessor', orig: 'NOME', type: 'txt' },\n    { i: 1, label: 'Sellers assessorados', orig: 'QTD SELLERS', type: 'int' },\n    { i: 2, label: 'Sellers já trabalhados', orig: 'ENGAJAMENTO', type: 'txt' },\n    { i: 3, label: 'Meta', orig: 'META', type: 'txt' },\n    { i: 4, label: 'Quantidade que bateu a meta', orig: 'QUANTOS BATERAM A META', type: 'int' },\n    { i: 5, label: 'Atingimento', orig: 'ATINGIMENTO', type: 'prog' }\n    ]\n}\n};\n\n// ---------------------------------------------------------------- células\nfunction progCell(t, v){\n  if(v === null || v === undefined || v === '') return '<td class=\"prog key\"><div class=\"pg-top\"><strong class=\"mut\">–</strong></div><div class=\"pg-bar none\"></div></td>';\n  const value = typeof v === 'number' ? v : Number(String(v).replace('%', '').replace(',', '.'));\n  if(!Number.isFinite(value)) return '<td class=\"prog key\"><div class=\"pg-top\"><strong class=\"mut\">–</strong></div><div class=\"pg-bar none\"></div></td>';\n  const ratio = (t.id === 'acc' && String(v).includes('%')) ? value / 100 : value;\n  const pct = ratio * 100;\n  const hit = ratio >= 1;\n  const fill = Math.max(0, Math.min(1, ratio));\n  const shownPct = hit ? pct : Math.min(99.99, pct);\n  const miss = (hit || t.noMiss) ? '' : 'Faltam '+nDec(Math.max(0.01, 100 - shownPct))+' p.p.';\n  return '<td class=\"prog key\"><div class=\"pg-top\"><strong class=\"'+(hit?'t-ok':'t-bad')+'\">'+nDec(shownPct)+'%</strong><span>'+miss+'</span></div>'+\n         '<div class=\"pg-bar'+(hit?' hit':'')+'\" role=\"img\" aria-label=\"'+nDec(shownPct)+'% da meta\"><i style=\"width:'+(fill*100).toFixed(2)+'%\"></i></div></td>';\n}\nfunction cell(t, c, row){\n  const v = row[c.i], k = c.key ? ' key' : '';\n  const vazio = v === null || v === undefined || v === '';\n  switch(c.type){\n    case 'id':   return '<td class=\"l\">'+esc(v)+'</td>';\n    case 'txt':  return vazio ? '<td class=\"mut l\">–</td>' : '<td class=\"l\">'+esc(typeof v==='number' ? nDec(v) : v)+'</td>';\n    case 'prog': return progCell(t, v);\n    case 'flag': return '<td class=\"'+k.trim()+'\"><span class=\"badge sm '+(v===true?'okb':'warnb')+'\">'+(v===true?c.yes:c.no)+'</span></td>';\n    case 'brl':  return vazio ? '<td class=\"mut\">–</td>' : '<td>'+nBRL(v)+'</td>';\n    case 'pct':  return vazio ? '<td class=\"mut\">–</td>' : '<td>'+nPct(v,2)+'</td>';\n    case 'pct2': return vazio ? '<td class=\"mut\">–</td>' : '<td>'+nPct(v*100,2)+'</td>';\n    case 'int':  return vazio ? '<td class=\"mut\">–</td>' : '<td>'+nInt(v)+'</td>';\n  }\n  return '<td>'+esc(v)+'</td>';\n}\n\n// ---------------------------------------------------------------- montagem de cada aba\nfunction countUp(el, to, ms){\n  if(reduceMotion || to < 2){ el.textContent = nInt(to); return; }\n  const t0 = performance.now();\n  (function step(now){\n    const p = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - p, 3);\n    el.textContent = nInt(Math.round(to * e));\n    if(p < 1) requestAnimationFrame(step);\n  })(t0);\n}\n\nconst ROW_H = 40;\n\nfunction build(t){\n  const root = $('panel-'+t.id);\n  const flagI = t.idx.flag;\n  const unit = t.unit || 'sellers';\n  const total = t.rows.length;\n  const hit = t.rows.reduce((s, r) => s + (r[flagI] === true ? 1 : 0), 0);\n  const miss = total - hit;\n  const pHit = total ? hit/total*100 : 0, pMiss = total ? miss/total*100 : 0;\n  t.state = {q:'', status:'all', sortCol:t.cols.findIndex(c => c.type==='prog'), sortDir:-1, view:t.rows};\n  const ph = t.searchPh || 'Buscar por Seller ID';\n\n  const goalsHtml = (!t.goals || !t.goals.length) ? '' : '<div class=\"goals\">'+t.goals.map(g => {\n    const n = t.rows.reduce((s, r) => s + (r[g.i] !== null && r[g.i] >= 1 ? 1 : 0), 0), p = total ? n/total*100 : 0;\n    return '<div class=\"goal\"><span class=\"gl\">'+esc(g.label)+'</span><div class=\"gbar\" role=\"img\" aria-label=\"'+nPct(p)+' bateram\"><i style=\"width:'+p.toFixed(2)+'%\"></i></div><span class=\"gn\"><b>'+nInt(n)+'</b> bateram · '+nPct(p)+'</span></div>';\n  }).join('')+'</div>';\n\n  const summaryHtml = t.hideGoalSummary\n    ? '<div class=\"cards\"><div class=\"card total\"><div class=\"lab\">Total de assessores</div><div class=\"num\" data-to=\"'+total+'\">0</div><div class=\"row\">Assessores na base de acompanhamento</div></div></div>'\n    : '<div class=\"cards\">'+\n        '<button type=\"button\" class=\"card total\" data-status=\"all\"><div class=\"lab\">'+esc(t.totalLabel || 'Total de sellers')+'</div><div class=\"num\" data-to=\"'+total+'\">0</div><div class=\"row\"><span class=\"badge y sm\">100%</span> da base total</div></button>'+\n        '<button type=\"button\" class=\"card ok\" data-status=\"hit\"><div class=\"lab\">'+esc(t.hitLabel || 'Bateram a meta')+'</div><div class=\"num\" data-to=\"'+hit+'\">0</div><div class=\"row\"><span class=\"badge okb\">'+nPct(pHit)+'</span> dos '+unit+'</div></button>'+\n        '<button type=\"button\" class=\"card bad\" data-status=\"miss\"><div class=\"lab\">'+esc(t.missLabel || 'Não bateram a meta')+'</div><div class=\"num\" data-to=\"'+miss+'\">0</div><div class=\"row\"><span class=\"badge warnb\">'+nPct(pMiss)+'</span> dos '+unit+'</div></button>'+\n      '</div>'+\n      '<div class=\"split\"><div class=\"split-top\"><span><b>'+nInt(hit)+'</b> bateram · <b>'+nInt(miss)+'</b> não bateram</span><span>Toque em um card para filtrar a tabela</span></div>'+\n        '<div class=\"split-bar\" role=\"img\" aria-label=\"'+nPct(pHit)+' bateram a meta e '+nPct(pMiss)+' não bateram\"><i class=\"s-ok\" style=\"width:calc('+pHit.toFixed(3)+'% - 1px)\"></i><i class=\"s-bad\" style=\"width:calc('+pMiss.toFixed(3)+'% - 1px)\"></i></div>'+goalsHtml+'</div>';\n\n  root.innerHTML = summaryHtml +\n    '<div class=\"panel\">'+\n      '<div class=\"panel-head\"><div><h2>Dados por '+esc(t.unitOne || 'seller')+'</h2><p>'+esc(t.subtitle)+'</p></div></div>'+\n      '<div class=\"controls\">'+\n        '<div class=\"search\"><input type=\"text\" autocomplete=\"off\" placeholder=\"'+esc(ph)+'\" aria-label=\"'+esc(ph)+'\"></div>'+\n        (t.hideGoalSummary ? '' : '<div class=\"quick\" role=\"group\" aria-label=\"Filtrar por status\">'+\n          '<button type=\"button\" data-status=\"all\">Todos</button><button type=\"button\" data-status=\"hit\">Bateram</button><button type=\"button\" data-status=\"miss\">Não bateram</button>'+\n        '</div>')+\n        '<button type=\"button\" class=\"ghost\" data-export>Exportar CSV</button>'+\n      '</div>'+\n      (t.hideGoalSummary\n        ? '<div class=\"legend\"><span><i class=\"key-dot\"></i>Dados de acompanhamento dos assessores</span><span><i class=\"lg y\"></i>Atingimento informado na planilha</span></div>'\n        : '<div class=\"legend\"><span><i class=\"key-dot\"></i>Colunas principais</span><span><i class=\"lg y\"></i>Progresso até a meta</span><span><i class=\"lg g\"></i>Meta batida</span><span>Barra cheia = meta atingida (100%)</span></div>')+\n      '<div class=\"tw\" tabindex=\"0\" aria-label=\"Lista\"><table class=\"dt\"><thead><tr>'+\n        t.cols.map((c,n) => '<th data-sort=\"'+n+'\" tabindex=\"0\" class=\"'+((c.type==='id'||c.type==='txt')?'l ':'')+(c.key?'key':'')+'\" title=\"Coluna original: '+esc(c.orig)+'\" aria-sort=\"none\">'+esc(c.label)+'<span class=\"ar\"></span></th>').join('')+\n      '</tr></thead><tbody></tbody></table></div>'+\n      '<div class=\"foot\"><span class=\"range\"></span><span>Role a lista para ver todos os '+unit+'</span></div>'+\n    '</div>';\n\n  root.querySelectorAll('.num').forEach(el => countUp(el, +el.dataset.to, 900));\n\n  const q = root.querySelector('.search input');\n  let tm; q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { t.state.q = q.value.trim(); refresh(t); }, 160); });\n  root.addEventListener('click', e => {\n    const s = e.target.closest('[data-status]'); if(s){ t.state.status = s.dataset.status; refresh(t); if(s.classList.contains('card')) root.querySelector('.panel').scrollIntoView({behavior: reduceMotion?'auto':'smooth', block:'start'}); return; }\n    if(e.target.closest('[data-export]')) { exportCsv(t); return; }\n    const th = e.target.closest('th[data-sort]'); if(th) sortBy(t, +th.dataset.sort);\n  });\n  root.addEventListener('keydown', e => { const th = e.target.closest('th[data-sort]'); if(th && (e.key==='Enter' || e.key===' ')){ e.preventDefault(); sortBy(t, +th.dataset.sort); } });\n  let raf = 0;\n  root.querySelector('.tw').addEventListener('scroll', () => { if(!raf) raf = requestAnimationFrame(() => { raf = 0; renderWindow(t); }); });\n  refresh(t);\n}\n\nfunction sortBy(t, n){\n  const st = t.state, ty = t.cols[n].type;\n  if(st.sortCol === n) st.sortDir = -st.sortDir; else { st.sortCol = n; st.sortDir = (ty==='id' || ty==='txt') ? 1 : -1; }\n  refresh(t);\n}\n\nfunction refresh(t){\n  const st = t.state, fI = t.idx.flag;\n  let v = t.rows;\n  if(st.status !== 'all') v = v.filter(r => st.status==='hit' ? r[fI] === true : r[fI] !== true);\n  if(st.q){ const qq = st.q.toLocaleLowerCase('pt-BR'); const campos = t.searchIdx || [0]; v = v.filter(r => campos.some(i => String(r[i] ?? '').toLocaleLowerCase('pt-BR').includes(qq))); }\n  if(st.sortCol !== null && st.sortCol >= 0){\n    const c = t.cols[st.sortCol], i = c.i, dir = st.sortDir, isId = c.type==='id';\n    v = v.slice().sort((a, b) => {\n      let x = a[i], y = b[i];\n      const nx = (x === null || x === undefined || x === ''), ny = (y === null || y === undefined || y === '');\n      if(nx && ny) return 0; if(nx) return 1; if(ny) return -1;\n      if(isId){ x = +x; y = +y; }\n      else if(typeof x === 'boolean'){ x = +x; y = +y; }\n      else if(typeof x === 'string' || typeof y === 'string') return String(x).localeCompare(String(y), 'pt-BR') * dir;\n      return x === y ? 0 : (x < y ? -dir : dir);\n    });\n  }\n  st.view = v;\n  const root = $('panel-'+t.id);\n  root.querySelectorAll('.quick button[data-status]').forEach(b => b.classList.toggle('on', b.dataset.status === st.status));\n  root.querySelectorAll('thead th').forEach((th, n) => {\n    const on = st.sortCol === n;\n    th.setAttribute('aria-sort', on ? (st.sortDir===1 ? 'ascending' : 'descending') : 'none');\n    th.querySelector('.ar').textContent = on ? (st.sortDir===1 ? '▲' : '▼') : '';\n  });\n  root.querySelector('.range').textContent = nInt(v.length)+' de '+nInt(t.rows.length)+' '+(t.unit || 'sellers')+' na lista';\n  root.querySelector('.tw').scrollTop = 0;\n  renderWindow(t);\n}\n\nfunction renderWindow(t){\n  const st = t.state, root = $('panel-'+t.id), box = root.querySelector('.tw'), tb = root.querySelector('tbody');\n  const n = st.view.length, cols = t.cols.length;\n  if(!n){ tb.innerHTML = '<tr><td colspan=\"'+cols+'\" class=\"empty\" style=\"text-align:center;font-family:var(--body);height:auto;padding:36px 20px\">Nenhum resultado encontrado. Ajuste a busca ou o filtro de status.</td></tr>'; return; }\n  const vh = box.clientHeight || 600;\n  const first = Math.max(0, Math.floor(box.scrollTop / ROW_H) - 8);\n  const last = Math.min(n, first + Math.ceil(vh / ROW_H) + 16);\n  const sp = h => h > 0 ? '<tr class=\"sp\" aria-hidden=\"true\" style=\"height:'+h+'px\"><td colspan=\"'+cols+'\" style=\"height:'+h+'px\"></td></tr>' : '';\n  let html = sp(first * ROW_H);\n  for(let i = first; i < last; i++){ const r = st.view[i]; html += '<tr>'+t.cols.map(c => cell(t, c, r)).join('')+'</tr>'; }\n  tb.innerHTML = html + sp((n - last) * ROW_H);\n}\n\nfunction exportCsv(t){\n  const num = v => (v === null || v === undefined) ? '' : (typeof v === 'boolean' ? (v ? 'Sim' : 'Não') : String(v).replace('.', ','));\n  const txt = v => '\"'+String(v === null || v === undefined ? '' : v).replace(/\"/g,'\"\"')+'\"';\n  const head = t.cols.map(c => txt(c.label)).join(';');\n  const lines = t.rows.map(r => t.cols.map(c => {\n    const v = r[c.i];\n    if(c.type==='id') return v;\n    if(c.type==='txt') return txt(v);\n    if(c.type==='flag') return v===true ? 'Sim' : 'Não';\n    if(c.type==='pct') return num(v===null ? null : Math.round(v*1e6)/1e8);\n    return num(v);\n  }).join(';'));\n  const blob = new Blob(['﻿' + head + '\\n' + lines.join('\\n')], {type:'text/csv;charset=utf-8'});\n  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);\n  a.download = 'gamification_bf2026_'+t.id+'.csv'; document.body.appendChild(a); a.click(); a.remove();\n  setTimeout(() => URL.revokeObjectURL(a.href), 1000);\n}\n\n// ---------------------------------------------------------------- abas\nfunction show(id){\n  Object.keys(TABS).forEach(k => {\n    const on = k === id;\n    $('tab-'+k).setAttribute('aria-selected', on);\n    $('panel-'+k).hidden = !on;\n  });\n  const t = TABS[id];\n  $('meta-pill').innerHTML = id === 'acc' ? '' :\n  '<span>'+esc(t.metaText)+'</span><strong>'+esc(t.metaBadge || (t.meta+'%'))+'</strong>';\n  if(t.state) renderWindow(t);\n}\nObject.keys(TABS).forEach(k => $('tab-'+k).addEventListener('click', () => show(k)));\ndocument.querySelector('.tabs').addEventListener('keydown', e => {\n  if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;\n  const ks = Object.keys(TABS), cur = ks.findIndex(k => $('tab-'+k).getAttribute('aria-selected')==='true');\n  const nx = ks[(cur + (e.key==='ArrowRight' ? 1 : -1) + ks.length) % ks.length]; show(nx); $('tab-'+nx).focus();\n});\n\n$('gen-note').textContent = '';\nObject.values(TABS).forEach(build);\nshow('cp');\ndocument.body.classList.add('intro');\nsetTimeout(() => document.body.classList.remove('intro'), 1400);\n</script>\n</body>\n</html>\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9f123a90-2c27-4d78-b75d-74fcefc5392a",
+      "name": "Set Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2000,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "18ugC3BEaHnQ5DaAeTPN8J3kCG5l3mnANGiu6ZKJfg_4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Extracao CP",
+          "mode": "name"
+        },
+        "options": {
+          "valueRenderOption": "UNFORMATTED_VALUE"
+        }
+      },
+      "id": "c1a0a001-0000-4000-8000-000000000001",
+      "name": "Ler CP",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2208,
+        -48
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "18ugC3BEaHnQ5DaAeTPN8J3kCG5l3mnANGiu6ZKJfg_4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Extração AFF",
+          "mode": "name"
+        },
+        "options": {
+          "valueRenderOption": "UNFORMATTED_VALUE"
+        }
+      },
+      "id": "c1a0a001-0000-4000-8000-000000000002",
+      "name": "Ler AFF",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2416,
+        -48
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "18ugC3BEaHnQ5DaAeTPN8J3kCG5l3mnANGiu6ZKJfg_4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Extração Minha Página",
+          "mode": "name"
+        },
+        "options": {
+          "valueRenderOption": "UNFORMATTED_VALUE"
+        }
+      },
+      "id": "c1a0a001-0000-4000-8000-000000000003",
+      "name": "Ler MP",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2624,
+        -48
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "18ugC3BEaHnQ5DaAeTPN8J3kCG5l3mnANGiu6ZKJfg_4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Acompanhamento_Acessores",
+          "mode": "name"
+        },
+        "options": {
+          "valueRenderOption": "UNFORMATTED_VALUE"
+        }
+      },
+      "id": "c1a0a001-0000-4000-8000-000000000004",
+      "name": "Ler Acompanhamento",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2832,
+        -48
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Nó Code (Run Once for All Items) do Verdi Flows.\n// Port do montarDados_/lerAba_ do codigo.gs (Apps Script) + substituição do <?!= dadosJson ?> do index.html.\n// Espera os nós do Google Sheets com os nomes abaixo, cada um lendo uma aba.\n\nconst NOS = { cp: 'Ler CP', aff: 'Ler AFF', mp: 'Ler MP', acomp: 'Ler Acompanhamento' };\n\nconst COLUNAS = {\n  cp: ['SELLER_ID', 'MEDIA_INVESTIMENTO_JAN_SET_2026', 'INVESTIMENTO_OUT_NOV_2026',\n       'VARIACAO_OUT_NOV_2026_VS_MEDIA_JAN_SET_2026', 'ATINGIMENTO_VS_META', 'FLAG_META_BATIDA',\n       'CRESCIMENTO_OUT_NOV_2025_VS_MEDIA_JAN_SET_2025',\n       'META_INVESTIMENTO_2026', 'NOME_SELLER', 'CNPJ', 'ASSESSOR'],\n  aff: ['SELLER_ID', 'TOTAL_ITENS', 'TOTAL_ITENS_KMIS', 'ITENS_COM_5_COMISSAO', 'ITENS_COM_5_DE_COMISSAO_PCT',\n        'ATINGIMENTO_VS_META', 'FLAG_META_BATIDA', 'NOME_SELLER', 'CNPJ', 'ASSESSOR'],\n  mp: ['SELLER_ID', 'cupons_validos', 'produtos_relampago',\n       'ATINGIMENTO_VS_META_CUPONS', 'ATINGIMENTO_VS_META_RELAMPAGO',\n       'NOME_SELLER', 'CNPJ', 'ASSESSOR']\n};\n\n// ---------------------------------------------------------------- conversões (iguais ao codigo.gs)\n\nconst normalizar = s => String(s === null || s === undefined ? '' : s).normalize('NFC').trim().toLowerCase();\n\nconst idSeller = v => {\n  if (v === null || v === undefined || v === '') return '';\n  if (typeof v === 'number') return String(Math.round(v));\n  return String(v).trim();\n};\n\nconst texto = v => (v === null || v === undefined ? '' : String(v).trim());\n\nconst cnpj = v => {\n  const s = texto(v);\n  if (!s) return '';\n  // Reconstitui zeros à esquerda se a planilha guardou o CNPJ como número.\n  return /^\\d{1,14}$/.test(s) ? s.padStart(14, '0') : s;\n};\n\nconst numero = v => {\n  if (v === null || v === undefined || v === '') return null;\n  if (typeof v === 'number') return isFinite(v) ? v : null;\n  if (typeof v === 'string') {\n    const t = v.trim().replace('%', '');\n    if (t === '' || t.charAt(0) === '#') return null;\n    const n = Number(t.indexOf(',') >= 0 ? t.replace(/\\./g, '').replace(',', '.') : t);\n    return isFinite(n) ? n : null;\n  }\n  return null;\n};\n\nconst arred = (v, casas) => {\n  const n = numero(v);\n  if (n === null) return null;\n  const f = Math.pow(10, casas);\n  return Math.round(n * f) / f;\n};\n\nconst inteiro = v => {\n  const n = numero(v);\n  return n === null ? null : Math.round(n);\n};\n\nconst porCento = v => {\n  const n = numero(v);\n  return n === null ? null : Math.round(n * 100 * 1e4) / 1e4;\n};\n\nconst paraBool = v => {\n  if (v === null || v === undefined || v === '') return null;\n  if (typeof v === 'boolean') return v;\n  if (typeof v === 'number') return v !== 0;\n  const t = normalizar(v);\n  if (['true', 'verdadeiro', 'sim', '1'].includes(t)) return true;\n  if (['false', 'falso', 'nao', 'não', '0'].includes(t)) return false;\n  return null;\n};\n\n// ---------------------------------------------------------------- leitura\n\n// Lê uma aba pelo nome dos cabeçalhos (cada item do nó do Sheets já é { CABECALHO: valor }).\nconst lerAba = chave => {\n  const linhas = $(NOS[chave]).all().map(i => i.json);\n  if (linhas.length === 0) return [];\n\n  const cab = {};\n  Object.keys(linhas[0]).forEach(k => {\n    const n = normalizar(k);\n    if (n && cab[n] === undefined) cab[n] = k;\n  });\n\n  const chaves = {};\n  COLUNAS[chave].forEach(col => {\n    const k = cab[normalizar(col)];\n    if (k === undefined) throw new Error(`Coluna \"${col}\" não encontrada na aba \"${NOS[chave]}\".`);\n    chaves[col] = k;\n  });\n\n  const out = [];\n  linhas.forEach(r => {\n    const id = idSeller(r[chaves.SELLER_ID]);\n    if (id === '') return;\n    const obj = {};\n    COLUNAS[chave].forEach(col => { obj[col] = r[chaves[col]]; });\n    obj.SELLER_ID = id;\n    out.push(obj);\n  });\n  return out;\n};\n\n// Acompanhamento_Acessores é lido pela POSIÇÃO das colunas (A=0 ... H=7), como no codigo.gs.\n// Atenção: depende de o Sheets devolver todas as colunas, inclusive as sem cabeçalho.\nconst lerAcompanhamento = () => $(NOS.acomp).all()\n  .map(i => Object.values(i.json))\n  .filter(r => String(r[0] === undefined || r[0] === null ? '' : r[0]).trim() !== '')\n  .map(r => [\n    String(r[0]).trim(), // A: Nome do assessor\n    inteiro(r[1]),       // B: Sellers na carteira\n    inteiro(r[2]),       // C: Quantidade já acessada\n    numero(r[6]),        // G: Meta (%) — 0,60 = 60%\n    inteiro(r[5]),       // F: Sellers que concluíram\n    numero(r[7])         // H: Atingimento (%) — 0,40 = 40%\n  ]);\n\n// ---------------------------------------------------------------- montagem dos dados\n\nconst cp = lerAba('cp').map(r => [\n  r.SELLER_ID,\n  arred(r.MEDIA_INVESTIMENTO_JAN_SET_2026, 6),\n  arred(r.INVESTIMENTO_OUT_NOV_2026, 6),\n  porCento(r.VARIACAO_OUT_NOV_2026_VS_MEDIA_JAN_SET_2026),\n  arred(r.ATINGIMENTO_VS_META, 6),\n  paraBool(r.FLAG_META_BATIDA) === true,\n  porCento(r.CRESCIMENTO_OUT_NOV_2025_VS_MEDIA_JAN_SET_2025),\n  // Campos novos ao final: preservam os índices dos indicadores existentes.\n  arred(r.META_INVESTIMENTO_2026, 6),\n  texto(r.NOME_SELLER),\n  cnpj(r.CNPJ),\n  texto(r.ASSESSOR)\n]);\n\nconst aff = lerAba('aff').map(r => [\n  r.SELLER_ID,\n  inteiro(r.TOTAL_ITENS),\n  inteiro(r.ITENS_COM_5_COMISSAO),\n  arred(r.ITENS_COM_5_DE_COMISSAO_PCT, 6),\n  arred(r.ATINGIMENTO_VS_META, 6),\n  paraBool(r.FLAG_META_BATIDA),\n  texto(r.NOME_SELLER),\n  cnpj(r.CNPJ),\n  texto(r.ASSESSOR),\n  inteiro(r.TOTAL_ITENS_KMIS)\n]);\n\nconst mp = lerAba('mp').map(r => {\n  const aCup = arred(r.ATINGIMENTO_VS_META_CUPONS, 6);\n  const aRel = arred(r.ATINGIMENTO_VS_META_RELAMPAGO, 6);\n  return [\n    r.SELLER_ID,\n    inteiro(r.cupons_validos),\n    inteiro(r.produtos_relampago),\n    aCup,\n    aRel,\n    aCup !== null && aRel !== null && aCup >= 1 && aRel >= 1,\n    texto(r.NOME_SELLER),\n    cnpj(r.CNPJ),\n    texto(r.ASSESSOR)\n  ];\n});\n\nconst acomp = lerAcompanhamento();\n\nif (!cp.length && !aff.length && !mp.length) {\n  throw new Error('Nenhuma linha lida das abas. Verifique o ID da planilha e as permissões do credencial do Sheets.');\n}\n\nconst gerado = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });\nconst dados = { fonte: 'Google Sheets', gerado, cp, aff, mp, acomp };\n\n// Mesmo escape do serializar_ do codigo.gs: impede que </script> ou separadores de linha quebrem o HTML.\nconst json = JSON.stringify(dados)\n  .replace(/</g, '\\\\u003c')\n  .replace(/>/g, '\\\\u003e')\n  .replace(/\\u2028/g, '\\\\u2028')\n  .replace(/\\u2029/g, '\\\\u2029');\n\nconst template = $('Set Config').first().json.template;\nif (!template.includes('<?!= dadosJson ?>')) {\n  throw new Error('Placeholder <?!= dadosJson ?> não encontrado no template.');\n}\nconst html = template.replace('<?!= dadosJson ?>', () => json);\n\nreturn [{\n  json: {\n    final_html: html,\n    gerado,\n    linhas: { cp: cp.length, aff: aff.length, mp: mp.length, acomp: acomp.length }\n  }\n}];\n"
+      },
+      "id": "c1a0a001-0000-4000-8000-000000000005",
+      "name": "Montar Dashboard",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3040,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=http://grid.melisystems.com/d/{{ $('Set Config').first().json.grid_doc_id }}/content",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text/html",
+        "body": "={{ $json.final_html }}",
+        "options": {}
+      },
+      "id": "ab57a1bc-86c7-43d3-9a89-1cc81dcdf168",
+      "name": "Upload to Grid",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3248,
+        -48
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "UKatcAmVOB0QE3nz",
+          "name": "Grid Token"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every Day 11AM São Paulo": {
+      "main": [
+        [
+          {
+            "node": "Set Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Config": {
+      "main": [
+        [
+          {
+            "node": "Ler CP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler CP": {
+      "main": [
+        [
+          {
+            "node": "Ler AFF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler AFF": {
+      "main": [
+        [
+          {
+            "node": "Ler MP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler MP": {
+      "main": [
+        [
+          {
+            "node": "Ler Acompanhamento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler Acompanhamento": {
+      "main": [
+        [
+          {
+            "node": "Montar Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Dashboard": {
+      "main": [
+        [
+          {
+            "node": "Upload to Grid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "id": "IwEgQU9q3OL7UdRN",
+      "name": "#VERDI/reporting"
+    },
+    {
+      "id": "8G7GGxAcFzIYXTx5",
+      "name": "#VERDI/automation"
+    }
+  ]
+}
