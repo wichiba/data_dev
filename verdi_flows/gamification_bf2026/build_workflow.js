@@ -40,8 +40,8 @@ const workflow = {
         assignments: {
           assignments: [
             { id: 'a1', name: 'today', value: "={{ $now.setZone('America/Sao_Paulo').toFormat('yyyy-MM-dd') }}", type: 'string' },
-            // Preencher com o ID do documento criado no Grid para o dashboard.
-            { id: 'a2', name: 'grid_doc_id', value: 'COLE_AQUI_O_ID_DO_DOC_NO_GRID', type: 'string' },
+            // ID do documento no Grid (grid.adminml.com/d/<id>/view) onde o dashboard é publicado.
+            { id: 'a2', name: 'grid_doc_id', value: '01M4HAZ0Z9PVYWDG2XBEWJPEYY', type: 'string' },
             { id: 'a3', name: 'grid_title', value: 'Dashboard Gamification Black Friday 2026', type: 'string' },
             { id: 'a4', name: 'template', value: template, type: 'string' }
           ]
